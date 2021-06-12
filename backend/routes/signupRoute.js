@@ -8,7 +8,7 @@ router.post('/',(req,res)=>{
     
     const user=new User({
         username:req.body.username,
-        password:req.body.password
+        password:req.body.password,
     })
 
     if(!req.body.username || !req.body.password){

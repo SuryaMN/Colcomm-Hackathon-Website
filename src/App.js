@@ -7,6 +7,8 @@ import Logout from './component/Logout'
 import Profile from './component/Profile'
 import Events from './component/Events'
 import CreateJoin from './component/CreateJoin'
+import CreateTeam from './component/CreateTeam'
+import JoinTeam from './component/JoinTeam'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
@@ -21,10 +23,12 @@ function App(){
             <Navbar />
             <Route exact path='/' component={Events} />
             <Route exact path='/signup'  component={Signup} />
-            <Route path='/login'  component={Login} />
-            <Route path='/logout'  component={Logout} />
-            <Route path='/profile'  component={Profile} />
-            <Route path='/events/:event_id' component={CreateJoin} />
+            <Route exact path='/login'  component={Login} />
+            <Route exact path='/logout'  component={Logout} />
+            <Route exact path='/profile'  component={Profile} />
+            <Route exact path='/events/:event_id' component={CreateJoin} />
+            <Route exact path='/events/:event_id/createTeam' component={CreateTeam} />
+            <Route exact path='/events/:event_id/joinTeam' component={JoinTeam} />
 
         </Router>
         </div>

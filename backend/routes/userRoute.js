@@ -9,5 +9,15 @@ router.get('/:id',(req,res)=>{
 
 })
 
+router.get('/info/:id',(req,res)=>{
+
+    User.findOne({_id:req.params.id})
+    .then(result => res.json(result))
+    .catch(err => res.json(err))
+
+})
+
+
+
 
 module.exports=router;
