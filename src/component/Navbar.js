@@ -21,7 +21,7 @@ function Navbar() {
             <a className="nav-link" href="/about">About</a>
           </li>
           <li className="nav-item active">
-            <a className="nav-link" href={userId !== "null"? "/add":"/login"}>Add Question</a>
+            <a className="nav-link" href={userId !== "null"? "/notifications":"/login"}>Notifications</a>
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">

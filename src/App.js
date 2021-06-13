@@ -9,10 +9,12 @@ import Events from './component/Events'
 import CreateJoin from './component/CreateJoin'
 import CreateTeam from './component/CreateTeam'
 import JoinTeam from './component/JoinTeam'
+import Notifications from './component/Notifications';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
+
 require('popper.js');
 
 function App(){
@@ -29,6 +31,7 @@ function App(){
             <Route exact path='/events/:event_id' component={CreateJoin} />
             <Route exact path='/events/:event_id/createTeam' component={CreateTeam} />
             <Route exact path='/events/:event_id/joinTeam' component={JoinTeam} />
+            <Route exact path='/notifications' component={Notifications} />
 
         </Router>
         </div>

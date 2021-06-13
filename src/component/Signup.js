@@ -29,6 +29,7 @@ function Signup(){
             else{
                 var userId = jwt_decode(result.data.token).id;
                 localStorage.setItem("user_id",userId);
+                localStorage.setItem("username",user.username)
                 console.log(result.data.msg)
                 window.location.href='/';
             }

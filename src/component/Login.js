@@ -31,7 +31,8 @@ function Login() {
                 else {
                     console.log(result.data)
                     var user_id = jwt_decode(result.data.token).id;
-                    localStorage.setItem("user_id", user_id)
+                    localStorage.setItem("user_id", user_id);
+                    localStorage.setItem("username",user.username);
                     window.location.href = "/";
                 }
 

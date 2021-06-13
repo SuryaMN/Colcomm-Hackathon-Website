@@ -10,6 +10,18 @@ router.get("/",(req,res)=>{
     .then(events => res.status(200).json(events))
     .catch(err => res.status(400).json("Error: "+err))
 })
+router.get("/:event_id",(req,res)=>{
+    Event.findOne({_id:req.params.event_id})
+    .then(event => res.status(200).json(event))
+    .catch(err => res.status(400).json("Error: "+err))
+})
+
+router.get("/team/:team_id",(req,res)=>{
+    Team.findOne({_id:req.params.team_id})
+    .then(team => res.status(200).json(team))
+    .catch(err => res.status(400).json("Error: "+err))
+
+})
 
 
 router.get('/:event_id/teams',(req,res)=>{
@@ -30,14 +42,21 @@ router.post('/createTeam',(req,res)=>{
     newTeam.save((err,team)=>{
         if(err) throw err;
         else{
-            User.findOne({_id:team.members[0]})
+            User.findOne({username:team.members[0]})
             .then(result =>{
                 let event_id = team.event_id
-                if(result.events)
-                    result.events[event_id] = team._id;
-                else
-                    result.events = {[event_id]:team._id};
-                
+                // if(result.events)
+                //     result.events[event_id] = team._id;
+                // else
+                //     result.events = {[event_id]:team._id};
+                if(result.events){
+                    result.events.push(event_id);
+                    result.teams.push(team._id);
+                }
+                else{
+                    result.events = [event_id];
+                    result.teams = [team._id]
+                }
                 result.save((err,user)=>{
                     
                     if(err) throw err;

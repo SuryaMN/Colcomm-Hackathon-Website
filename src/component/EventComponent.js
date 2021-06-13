@@ -14,8 +14,8 @@ function EventComponent(props){
   
                 <div className="card-container">
                 <div className="card card-1">
-                <h3>{props.name}</h3>
-                <h2 className="card__title">{props.description}</h2>
+                <h2>{props.name}</h2>
+                <h4 className="card__title">{props.description}</h4>
                 <Link to={'/events/'+props.id} ><span></span></Link> 
                 
                 

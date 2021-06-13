@@ -24,6 +24,7 @@ const EventsPageRoute = require("./routes/teamsRoute/eventsRoute")
 const SignupRoute=require('./routes/signupRoute')
 const LoginRoute = require("./routes/loginRoute")
 const UserRoute = require("./routes/userRoute")
+const NotificationRoute = require("./routes/teamsRoute/NotificationRoute")
 
 
 app.use("/events",EventsPageRoute)
@@ -33,6 +34,8 @@ app.use('/signup',SignupRoute)
 app.use('/login',LoginRoute)
 
 app.use('/user',UserRoute)
+
+app.use('/notifications',NotificationRoute)
 
 
 
