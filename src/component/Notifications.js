@@ -19,7 +19,7 @@ export default function Notifications() {
         <div>
             {
                 notifications.map(notification =>{
-                    return <NotifContainer key={notification._id} id={notification._id} from={notification.from} to={notification.to}  msg={notification.msg} notif_type={notification.notif_type} team={notification.team}/>
+                    return <NotifContainer key={notification._id} id={notification._id} from={notification.from} to={notification.to}  event_id={notification.event_id} event_name={notification.event_name} msg={notification.msg} notif_type={notification.notif_type} team={notification.team} team_id={notification.team_id}/>
                 })
             }
         </div>

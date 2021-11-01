@@ -6,6 +6,9 @@ router.post('/',(req,res)=>{
         from:req.body.from,
         to:req.body.to,
         team:req.body.team,
+        team_id:req.body.team_id,
+        event_id:req.body.event_id,
+        event_name:req.body.event_name,
         msg:req.body.msg,
         notif_type:req.body.notif_type
     })

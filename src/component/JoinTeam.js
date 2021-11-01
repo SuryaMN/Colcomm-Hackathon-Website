@@ -13,7 +13,7 @@ export default function JoinTeam(props) {
             .catch(err => console.log(err))
     }, [])
     return (
-        <div>
+        <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-around"}}>
             {
                 teams.map(team =>{
                     return(

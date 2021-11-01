@@ -3,6 +3,7 @@ const router = require("express").Router();
 const Event = require("../../models/events.model")
 const User = require("../../models/signup.model")
 const Team = require("../../models/teams.model")
+const Notification = require("../../models/notifications.model")
 
 
 router.get("/",(req,res)=>{
@@ -69,6 +70,107 @@ router.post('/createTeam',(req,res)=>{
             .catch(err => res.status(400).json({"msg":"Some problem occurred"}))
         }
     })
+})
+
+router.post("/updateTeam",(req,res)=>{
+    const notification = new Notification({
+        from:req.body.from,
+        to:req.body.to,
+        event_id:req.body.event_id,
+        event_name:req.body.event_name,
+        team:req.body.team,
+        team_id:req.body.team_id,
+        msg:req.body.msg,
+        notif_type:req.body.notif_type
+    })
+
+    
+
+    Team.findOne({_id:req.body.team_id})
+    .then(result => {
+        result.members.push(req.body.to);
+        result.save((err,team)=>{
+            if(err) res.status(200).json({msg:"Something went wrong!"});
+            else{
+                console.log(team);
+                User.findOne({username:req.body.to})
+                .then(user => {
+                    if(user.events){
+                        user.events.push(req.body.event_id);
+                        user.teams.push(req.body.team_id);
+                    }
+                    else{
+                        user.events = [req.body.event_id];
+                        user.teams = [req.body.team_id]
+                    }
+                    user.save((err,user)=>{
+                        if(err) res.status(200).json({msg:"Something went wrong!"});
+                        else{
+                            notification.save((err,notif)=>{
+                                if(err) res.status(200).json({msg:"Something went wrong!"});
+                                else{
+                                    res.status(200).json({msg:req.body.to+" has successfully joined your team"})
+                                }
+                            })
+                        }
+                    })
+                })
+                .catch(err => console.log(err))
+            }
+        })
+    })
+    .catch(err => console.log(err))
+})
+
+// Accept Invite
+router.post("/updateTeam/invite",(req,res)=>{
+    const notification = new Notification({
+        from:req.body.from,
+        to:req.body.to,
+        event_id:req.body.event_id,
+        event_name:req.body.event_name,
+        team:req.body.team,
+        team_id:req.body.team_id,
+        msg:req.body.msg,
+        notif_type:req.body.notif_type
+    })
+
+    
+
+    Team.findOne({_id:req.body.team_id})
+    .then(result => {
+        result.members.push(req.body.from);
+        result.save((err,team)=>{
+            if(err) res.status(200).json({msg:"Something went wrong!"});
+            else{
+                console.log(team);
+                User.findOne({username:req.body.from})
+                .then(user => {
+                    if(user.events){
+                        user.events.push(req.body.event_id);
+                        user.teams.push(req.body.team_id);
+                    }
+                    else{
+                        user.events = [req.body.event_id];
+                        user.teams = [req.body.team_id]
+                    }
+                    user.save((err,user)=>{
+                        if(err) res.status(200).json({msg:"Something went wrong!"});
+                        else{
+                            notification.save((err,notif)=>{
+                                if(err) res.status(200).json({msg:"Something went wrong!"});
+                                else{
+                                    res.status(200).json({msg:"You have successfully joined the team "+req.body.team+" in "+req.body.event_name})
+                                }
+                            })
+                        }
+                    })
+                })
+                .catch(err => console.log(err))
+            }
+        })
+    })
+    .catch(err => console.log(err))
 })
 
 
